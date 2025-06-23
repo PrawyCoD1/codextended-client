@@ -119,6 +119,8 @@ void WWW_BeginDownload(void) {
 			Q_strncpyz(remoteTempName, FS_BuildOSPath(url, remoteName, ""), sizeof(remoteTempName));
 			remoteTempName[strlen(remoteTempName) - 1] = '\0';
 
+			CL_AddReliableCommand(va("download %s", remoteName));
+			
 			if (!DL_BeginDownload(localTempName, remoteTempName, 1)) {
 				clc_bWWWDl = false;
 				char *error = va("Download failure while getting '%s'\n", remoteTempName); // get the msg before clearing structs
